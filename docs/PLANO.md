@@ -12,10 +12,10 @@ Os itens abaixo resumem a rubrica mostrada no vídeo do enunciado. Ela é materi
 - [x] Fazer revisão de produto, backend e interface com três agentes e registrar as contribuições.
 - [x] Criar três skills de apoio para os papéis especializados.
 - [x] Conferir sintaxe, aplicar migração local e fazer verificação rápida dos fluxos principais.
-- [ ] Criar banco D1 e preencher o `database_id` no `wrangler.toml`.
+- [ ] Autorizar o Wrangler, criar banco D1 e preencher o `database_id` no `wrangler.toml`.
 - [x] Rodar localmente e corrigir problemas encontrados.
 - [ ] Publicar na Cloudflare e confirmar a URL e a persistência.
-- [ ] Criar repositório público no GitHub e enviar os arquivos.
+- [x] Criar repositório público no GitHub e enviar os arquivos.
 - [ ] Capturar evidências de aplicação, API, banco e documentação.
 - [ ] Conferir o texto completo da rubrica e adaptar se houver requisito que não aparece legível no vídeo.
 
@@ -45,3 +45,7 @@ Os registros descrevem as três contribuições reais feitas nesta etapa: um age
 - Verificação rápida local: página e health check retornaram 200; criação, conclusão e exclusão funcionaram; `done` inválido foi rejeitado com 400.
 
 Isso não valida uma instância remota nem substitui a publicação final.
+
+## Repositório
+
+Código publicado em [github.com/luiz964/dia-claro-cloudflare-tasks](https://github.com/luiz964/dia-claro-cloudflare-tasks).
