@@ -2,6 +2,8 @@
 
 Aplicação web em português para organizar tarefas. A interface estática é servida por Cloudflare Workers Assets; uma API no Worker grava os dados no Cloudflare D1.
 
+> **Estado provisório:** o vídeo do sorteio mostra que o projeto específico fica oculto até a confirmação do e-mail. Este painel de tarefas é uma primeira versão técnica; as funcionalidades do projeto sorteado e a autenticação Discord ainda precisam ser alinhadas às instruções completas.
+
 ## O que já está implementado
 
 - Criar, listar, concluir e excluir tarefas.
@@ -9,6 +11,8 @@ Aplicação web em português para organizar tarefas. A interface estática é s
 - API JSON com validação, respostas de erro e consultas preparadas.
 - Migração SQL com restrições e índice.
 - Interface responsiva e acessível por teclado/leitor de tela em pontos principais.
+- Licença MIT em `LICENSE`.
+- Registros do harness/agentes em `docs/agents/` e skills em `skills/`.
 
 ## Rodar localmente
 
@@ -42,4 +46,4 @@ Para reproduzir em outra conta Cloudflare, faça login com `npx wrangler login`,
 
 ## Estado
 
-Aplicação publicada e verificada com o D1 remoto. Evidências da validação estão em `docs/VALIDACAO_REMOTA.md`. O código está em [github.com/luiz964/dia-claro-cloudflare-tasks](https://github.com/luiz964/dia-claro-cloudflare-tasks).
+Aplicação publicada e verificada com o D1 remoto. Evidências estão em `docs/VALIDACAO_REMOTA.md`. O código está em [github.com/luiz964/dia-claro-cloudflare-tasks](https://github.com/luiz964/dia-claro-cloudflare-tasks). A entrega ainda não está final: faltam o projeto sorteado, OAuth2 Discord, publicação do hash oficial (aguardando confirmação) e envio dos links no AVA.
