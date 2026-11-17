@@ -73,6 +73,7 @@ function render(data) {
       for (let i = 0; i < 24; i++) {
         if (occupied.has(i)) continue;
         const slot = document.createElement('button'); slot.type = 'button'; slot.className = 'slot';
+        slot.style.gridColumn = String(i + 1);
         const start = timeAt(i), end = timeAt(i + 1);
         const isPast = datePicker.value < today || (datePicker.value === today && start <= new Intl.DateTimeFormat('en-GB', { timeZone: data.timezone, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date()));
         slot.disabled = isPast || !currentUser;
@@ -85,8 +86,8 @@ function render(data) {
         const block = document.createElement('div'); block.className = `slot reserved${reservation.mine ? ' mine' : ''}`;
         const startIndex = (minute(reservation.start_time) - 480) / 30;
         const count = (minute(reservation.end_time) - minute(reservation.start_time)) / 30;
-        block.style.left = `calc(${startIndex / 24 * 100}% + ${startIndex * 2}px)`;
-        block.style.width = `calc(${count / 24 * 100}% + ${count * 2 - 2}px)`;
+        block.style.left = `calc(${startIndex / 24 * 100}% + ${startIndex / 12}px)`;
+        block.style.width = `calc(${count / 24 * 100}% + ${count / 12 - 2}px)`;
         block.setAttribute('aria-label', `${reservation.mine ? 'Sua reserva' : 'Reservado'}, ${reservation.start_time} a ${reservation.end_time}`);
         const label = document.createElement('span'); label.textContent = `${reservation.mine ? 'Sua · ' : 'Ocupado · '}${reservation.start_time}–${reservation.end_time}`; block.append(label);
         if (reservation.mine && currentUser && (datePicker.value > today || reservation.start_time > new Intl.DateTimeFormat('en-GB', { timeZone: data.timezone, hour: '2-digit', minute: '2-digit', hourCycle: 'h23' }).format(new Date()))) {
@@ -107,7 +108,13 @@ function openBooking(resource, start) {
   document.querySelector('#booking-start').value = start;
   document.querySelector('#dialog-notice').textContent = '';
   const select = document.querySelector('#duration'); select.value = '30';
-  for (const option of select.options) option.disabled = Number(option.value) > 120 - (dayData.user_minutes_reserved || 0) || minute(start) + Number(option.value) > 1200;
+  for (const option of select.options) {
+    const duration = Number(option.value);
+    const overlaps = (dayData.reservations || []).some(item => item.resource_id === resource.id
+      && minute(start) < minute(item.end_time) && minute(start) + duration > minute(item.start_time));
+    option.disabled = duration > 120 - (dayData.user_minutes_reserved || 0)
+      || minute(start) + duration > 1200 || overlaps;
+  }
   dialog.showModal();
 }
 async function refresh() {

@@ -176,7 +176,8 @@ async function createReservation(request, env, user) {
   let body;
   try { body = await request.json(); } catch { return errorJson("O corpo precisa ser JSON válido.", 400); }
   const { resource_id: resourceId, date, start_time: startTime, duration_minutes: duration } = body || {};
-  if (typeof resourceId !== "string" || !validDate(date) || !Number.isInteger(duration) || ![30, 60, 90, 120].includes(duration)) {
+  if (typeof resourceId !== "string" || typeof date !== "string" || !validDate(date)
+    || typeof startTime !== "string" || !Number.isInteger(duration) || ![30, 60, 90, 120].includes(duration)) {
     return errorJson("Informe espaço, data e duração válida (30, 60, 90 ou 120 minutos).", 400);
   }
   const startMinute = timeToMinutes(startTime);
