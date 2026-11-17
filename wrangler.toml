@@ -1,0 +1,14 @@
+name = "painel-tarefas-cloudflare"
+main = "src/index.js"
+compatibility_date = "2026-11-17"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "painel-tarefas-db"
+database_id = "00000000-0000-0000-0000-000000000000" # ID local de exemplo; substitua pelo ID real antes de publicar com Wrangler.
+migrations_dir = "migrations"

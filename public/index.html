@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f5f7">
+  <title>Painel de tarefas</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar"><a class="brand" href="#"><span class="brand-mark">✓</span> dia<span>claro</span></a><span class="cloud-tag"><i></i> Cloudflare</span></header>
+    <section class="hero"><p class="eyebrow">SEU ESPAÇO DE TRABALHO</p><h1>Menos correria.<br><span>Mais feito.</span></h1><p class="intro">Organize o que importa e acompanhe seu progresso, um passo de cada vez.</p></section>
+    <section class="board" aria-label="Lista de tarefas">
+      <div class="board-head"><div><h2>Minhas tarefas</h2><p id="summary">Carregando tarefas…</p></div><div class="filters" role="group" aria-label="Filtrar tarefas"><button class="filter active" data-filter="all" aria-pressed="true">Todas</button><button class="filter" data-filter="open" aria-pressed="false">A fazer</button><button class="filter" data-filter="done" aria-pressed="false">Feitas</button></div></div>
+      <form id="task-form" class="composer"><label class="sr-only" for="task-title">Nova tarefa</label><input id="task-title" maxlength="160" placeholder="O que você precisa fazer?" required><button type="submit" aria-label="Adicionar tarefa">+</button></form>
+      <label class="sr-only" for="task-description">Descrição opcional</label><input id="task-description" class="description-input" maxlength="1000" placeholder="Adicione um detalhe (opcional)">
+      <p id="notice" class="notice" role="status"></p><ul id="task-list" class="task-list"></ul><div id="empty" class="empty" hidden><span>✦</span><p>Nada por aqui ainda.<br>Adicione sua primeira tarefa acima.</p></div>
+      <footer class="board-foot"><span class="live-dot"></span><span id="connection">Conectando ao banco de dados…</span></footer>
+    </section>
+    <footer class="page-foot">Feito para deixar o dia mais leve. <span>✳</span></footer>
+  </main>
+</body>
+</html>
