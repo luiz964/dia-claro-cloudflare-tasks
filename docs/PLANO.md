@@ -9,25 +9,29 @@ Os itens abaixo resumem a rubrica mostrada no vídeo do enunciado. Ela é materi
 - [x] Implementar API serverless no Cloudflare Worker.
 - [x] Definir schema e migração para Cloudflare D1.
 - [x] Documentar arquitetura, endpoints e publicação.
-- [x] Fazer revisão de produto, backend e interface com três agentes e registrar as contribuições.
-- [x] Criar três skills de apoio para os papéis especializados.
+- [x] Fazer revisão de backend, interface e teste/validação com três agentes independentes e registrar o harness.
+- [x] Criar skills para os três agentes especializados.
 - [x] Conferir sintaxe, aplicar migração local e fazer verificação rápida dos fluxos principais.
 - [x] Autorizar o Wrangler, criar banco D1 e preencher o `database_id` no `wrangler.toml`.
 - [x] Rodar localmente e corrigir problemas encontrados.
 - [x] Publicar na Cloudflare e confirmar a URL e a persistência.
 - [x] Criar repositório público no GitHub e enviar os arquivos.
+- [x] Incluir licença MIT.
 - [x] Registrar evidências de aplicação, API, banco e documentação em `docs/VALIDACAO_REMOTA.md`.
-- [ ] Conferir o texto completo da rubrica e adaptar se houver requisito que não aparece legível no vídeo.
+- [ ] Receber o título e as instruções completas do projeto sorteado, ocultas até confirmar o e-mail.
+- [ ] Implementar o projeto sorteado e login Discord OAuth2 (user_id, nome, avatar) com validação de regras no Worker.
+- [ ] Incluir o hash oficial no README e no rodapé depois de autorização para publicar esse identificador.
+- [ ] Enviar as URLs do app e do GitHub ao AVA depois de autorização para submeter.
 
 ## Mapeamento da rubrica (100 pontos)
 
 | Critério lido no vídeo | Peso | Evidência planejada |
 | --- | ---: | --- |
 | Aplicação online na Cloudflare Pages/Workers | 25 | URL pública e captura da aplicação |
-| Arquitetura serverless com Cloudflare D1 | 25 | Worker, binding D1, migração e dados persistentes |
+| Arquitetura serverless, D1 e OAuth2 Discord | 25 | Worker, D1, OAuth2 (a implementar) e validação server-side |
 | Interface web HTML, CSS e JavaScript | 15 | Interface responsiva e captura de uso |
-| Engenharia de agentes, documentação e skills; mínimo de 3 agentes | 25 | Papéis/registros em `docs/agents/` e skills em `skills/` |
-| Repositório público no GitHub | 10 | URL pública e histórico de commits |
+| Engenharia de agentes, harness e skills; mínimo de 3 agentes (um para teste/validação) | 25 | Harness e registros em `docs/agents/`, skills em `skills/` |
+| Repositório público, licença MIT, hash no README/rodapé e entrega no AVA | 10 | GitHub público e licença feitos; hash/AVA pendentes de autorização |
 
 ## Agentes planejados
 
