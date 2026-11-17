@@ -38,6 +38,7 @@ Para publicar: aplique `npm run db:migrate:remote` e rode `npm run deploy`. Conf
 | GET | `/api/me` | Discord | Perfil da pessoa autenticada |
 | GET | `/api/auth/discord/start` | Público | Inicia OAuth2 Discord |
 | GET | `/api/auth/discord/callback` | OAuth2 | Valida estado e grava/atualiza perfil no D1 |
+| GET | `/api/auth/status` | Público | Informa se OAuth2 está configurado sem expor credenciais |
 | POST | `/api/reservations` | Discord | Cria reserva com regras de negócio no Worker |
 | DELETE | `/api/reservations/:id` | Discord/titular | Cancela reserva futura própria |
 | POST | `/api/auth/logout` | Sessão | Encerra sessão |

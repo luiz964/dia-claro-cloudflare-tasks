@@ -35,6 +35,18 @@ async function loadUser() {
     if (currentUser.avatar_url) { avatar.src = currentUser.avatar_url; avatar.hidden = false; } else avatar.hidden = true;
     document.querySelector('#profile').hidden = false; signin.hidden = true;
   } catch { currentUser = null; document.querySelector('#profile').hidden = true; signin.hidden = false; }
+  if (!currentUser) {
+    try {
+      const status = await api('/api/auth/status');
+      if (!status.discord_configured) {
+        document.querySelector('#signin-message').textContent = 'O acesso Discord está aguardando configuração pelo responsável pelo projeto.';
+        const login = document.querySelector('#discord-login');
+        login.removeAttribute('href'); login.setAttribute('aria-disabled', 'true');
+        login.innerHTML = '<span>◉</span> Login em configuração';
+        login.classList.add('disabled');
+      }
+    } catch { /* Mantém a tela acessível se a verificação de status falhar. */ }
+  }
 }
 function render(data) {
   dayData = data;

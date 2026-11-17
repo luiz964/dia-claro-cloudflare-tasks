@@ -257,6 +257,10 @@ export default {
         return await discordCallback(request, env, url);
       }
 
+      if (url.pathname === "/api/auth/status" && request.method === "GET") {
+        return json({ discord_configured: Boolean(env.DISCORD_CLIENT_ID && env.DISCORD_CLIENT_SECRET && env.DISCORD_REDIRECT_URI) });
+      }
+
       if (url.pathname === "/api/auth/logout" && request.method === "POST") {
         return new Response(null, {
           status: 204,
