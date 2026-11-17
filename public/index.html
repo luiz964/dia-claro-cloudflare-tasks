@@ -3,23 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f4f5f7">
-  <title>Painel de tarefas</title>
+  <meta name="theme-color" content="#f5f7f4">
+  <meta name="description" content="Agenda diária de salas, cabines de estudo e bancadas de laboratório.">
+  <title>Agenda de espaços · Vértice</title>
   <link rel="stylesheet" href="/styles.css">
   <script src="/app.js" defer></script>
 </head>
 <body>
-  <main class="shell">
-    <header class="topbar"><a class="brand" href="#"><span class="brand-mark">✓</span> dia<span>claro</span></a><span class="cloud-tag"><i></i> Cloudflare</span></header>
-    <section class="hero"><p class="eyebrow">SEU ESPAÇO DE TRABALHO</p><h1>Menos correria.<br><span>Mais feito.</span></h1><p class="intro">Organize o que importa e acompanhe seu progresso, um passo de cada vez.</p></section>
-    <section class="board" aria-label="Lista de tarefas">
-      <div class="board-head"><div><h2>Minhas tarefas</h2><p id="summary">Carregando tarefas…</p></div><div class="filters" role="group" aria-label="Filtrar tarefas"><button class="filter active" data-filter="all" aria-pressed="true">Todas</button><button class="filter" data-filter="open" aria-pressed="false">A fazer</button><button class="filter" data-filter="done" aria-pressed="false">Feitas</button></div></div>
-      <form id="task-form" class="composer"><label class="sr-only" for="task-title">Nova tarefa</label><input id="task-title" maxlength="160" placeholder="O que você precisa fazer?" required><button type="submit" aria-label="Adicionar tarefa">+</button></form>
-      <label class="sr-only" for="task-description">Descrição opcional</label><input id="task-description" class="description-input" maxlength="1000" placeholder="Adicione um detalhe (opcional)">
-      <p id="notice" class="notice" role="status"></p><ul id="task-list" class="task-list"></ul><div id="empty" class="empty" hidden><span>✦</span><p>Nada por aqui ainda.<br>Adicione sua primeira tarefa acima.</p></div>
-      <footer class="board-foot"><span class="live-dot"></span><span id="connection">Conectando ao banco de dados…</span></footer>
-    </section>
-    <footer class="page-foot"><span class="footer-message">Feito para deixar o dia mais leve. <b>✳</b></span><small>Chave única oficial: <code>P26-2A-5665-AB35-3EB7-E9EB</code></small></footer>
-  </main>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Vértice, início"><span class="brand-icon">V</span><span>vértice<span class="brand-dot">.</span></span></a>
+      <div class="topbar-right"><span class="cloud-label"><i></i> Cloudflare + D1</span><div id="profile" class="profile" hidden><img id="avatar" alt=""><span id="username"></span><button id="logout" class="text-button">Sair</button></div></div>
+    </header>
+    <main>
+      <section class="intro"><div><p class="eyebrow">ESPAÇOS COMPARTILHADOS</p><h1>Encontre seu<br><em>lugar para focar.</em></h1><p class="lede">Consulte a agenda do campus e reserve um espaço para o que precisa fazer.</p></div><aside class="quota" aria-live="polite"><span class="quota-label">SEU TEMPO HOJE</span><strong id="quota-value">— <small>/ 2h</small></strong><div class="quota-track"><span id="quota-fill"></span></div><span id="quota-note">Entre com Discord para reservar</span></aside></section>
+      <section class="agenda" aria-label="Agenda diária dos espaços">
+        <div class="agenda-toolbar"><div class="date-control"><button id="previous-day" class="icon-button" aria-label="Dia anterior">←</button><label class="sr-only" for="date-picker">Data da agenda</label><input type="date" id="date-picker"><button id="next-day" class="icon-button" aria-label="Próximo dia">→</button><button id="today" class="today-button">Hoje</button></div><div class="legend"><span><i class="legend-free"></i>Livre</span><span><i class="legend-mine"></i>Sua reserva</span><span><i class="legend-other"></i>Reservado</span></div></div>
+        <div id="notice" class="notice" role="status" aria-live="polite"></div>
+        <div id="schedule" class="schedule"><div class="loading">Carregando agenda…</div></div>
+        <div class="schedule-foot"><span>Horário local · São Paulo</span><span>Reservas em intervalos de 30 minutos · 08:00–20:00</span></div>
+      </section>
+      <section class="signin" id="signin"><div><h2>Seu próximo horário começa aqui.</h2><p>Entre com Discord para reservar e acompanhar seus horários.</p></div><a class="discord-button" href="/api/auth/discord/start"><span>◉</span> Entrar com Discord <b>↗</b></a></section>
+    </main>
+    <footer class="page-footer"><span>Um espaço para cada boa ideia.</span><small>Chave oficial <code>P26-2A-5665-AB35-3EB7-E9EB</code></small></footer>
+  </div>
+  <dialog id="booking-dialog" class="booking-dialog"><form id="booking-form"><button type="button" class="dialog-close" id="close-dialog" aria-label="Fechar">×</button><p class="eyebrow">NOVA RESERVA</p><h2 id="booking-title">Reserve seu horário</h2><p id="booking-subtitle" class="dialog-subtitle"></p><input type="hidden" id="booking-resource"><input type="hidden" id="booking-date"><input type="hidden" id="booking-start"><label for="duration">Duração</label><select id="duration"><option value="30">30 minutos</option><option value="60">1 hora</option><option value="90">1 hora e 30 minutos</option><option value="120">2 horas</option></select><p class="form-hint">Limite de até 2 horas por pessoa por dia.</p><p id="dialog-notice" class="notice" role="alert"></p><button class="reserve-button" type="submit">Confirmar reserva</button></form></dialog>
 </body>
 </html>

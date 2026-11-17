@@ -1,53 +1,51 @@
-# Dia Claro — painel de tarefas
+# Vértice — agenda de espaços
 
-Aplicação web em português para organizar tarefas. A interface estática é servida por Cloudflare Workers Assets; uma API no Worker grava os dados no Cloudflare D1.
+Aplicação para consultar e reservar salas de reunião, cabines de estudo e bancadas de laboratório. A interface diária diferencia horários livres, reservas da pessoa autenticada e reservas feitas por terceiros. O frontend usa HTML, CSS e JavaScript sem framework; o backend roda em Cloudflare Workers e persiste dados no D1.
 
-> **Estado provisório:** o vídeo do sorteio mostra que o projeto específico fica oculto até a confirmação do e-mail. Este painel de tarefas é uma primeira versão técnica; as funcionalidades do projeto sorteado e a autenticação Discord ainda precisam ser alinhadas às instruções completas.
+## Funcionalidades
 
-## O que já está implementado
-
-- Criar, listar, concluir e excluir tarefas.
-- Descrição opcional e filtros para todas, pendentes e concluídas.
-- API JSON com validação, respostas de erro e consultas preparadas.
-- Migração SQL com restrições e índice.
-- Interface responsiva e acessível por teclado/leitor de tela em pontos principais.
-- Licença MIT em `LICENSE`.
-- Registros do harness/agentes em `docs/agents/` e skills em `skills/`.
+- Grade diária de 08:00 a 20:00 em intervalos de 30 minutos, com navegação de datas e recursos agrupados por tipo.
+- Cores distintas para horários livres, reservas próprias e reservas de outras pessoas.
+- Login e logout via OAuth2 Discord (`identify`); perfil com ID, nome de usuário, nome de exibição e avatar armazenado no D1.
+- Reservas com duração de 30, 60, 90 ou 120 minutos.
+- Validação server-side para impedir horários passados, sobreposições no mesmo espaço e mais de 120 minutos ativos por pessoa/dia.
+- Cancelamento pelo titular antes do início do horário.
+- Layout responsivo e chave oficial do trabalho no README e rodapé.
 
 ## Rodar localmente
 
-1. Instale as dependências com `npm install`.
-2. Para desenvolvimento local, aplique a migração com `npm run db:migrate:local`.
-3. Inicie o Worker com `npm run dev`.
+1. Instale dependências: `npm install`.
+2. Aplique as migrações locais: `npm run db:migrate:local`.
+3. Configure `DISCORD_CLIENT_ID` como variável Wrangler e `DISCORD_CLIENT_SECRET` com `npx wrangler secret put DISCORD_CLIENT_SECRET`.
+4. No Discord Developer Portal, habilite OAuth2 e registre como redirect URI o valor de `DISCORD_REDIRECT_URI` em `wrangler.toml` (para local, configure o endereço local correspondente).
+5. Inicie: `npm run dev`.
 
 ## Publicação
 
-Aplicação publicada em [painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev](https://painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev). O Worker usa Cloudflare Workers Assets e o banco remoto D1 `painel-tarefas-db`.
+Aplicação: [painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev](https://painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev). O Worker usa Workers Assets e o D1 remoto `painel-tarefas-db`.
 
-Para reproduzir em outra conta Cloudflare, faça login com `npx wrangler login`, crie um banco usando `npx wrangler d1 create painel-tarefas-db`, copie o `database_id` retornado para `wrangler.toml`, aplique `npm run db:migrate:remote` e execute `npm run deploy`.
+Para publicar: aplique `npm run db:migrate:remote` e rode `npm run deploy`. Configure no ambiente de produção as variáveis OAuth2 `DISCORD_CLIENT_ID`, `DISCORD_REDIRECT_URI` e o secret `DISCORD_CLIENT_SECRET`. O segredo nunca deve entrar no repositório.
 
 ## Chave única oficial
 
 `P26-2A-5665-AB35-3EB7-E9EB`
 
-## Endpoints
+## API
 
-| Método | Caminho | Ação |
-| --- | --- | --- |
-| GET | `/api/health` | Verifica o Worker |
-| GET | `/api/tasks` | Lista tarefas |
-| POST | `/api/tasks` | Cria tarefa (`title`, `description?`) |
-| PATCH | `/api/tasks/:id` | Atualiza título, descrição ou estado concluído |
-| DELETE | `/api/tasks/:id` | Exclui tarefa |
+| Método | Caminho | Acesso | Ação |
+| --- | --- | --- | --- |
+| GET | `/api/availability?date=AAAA-MM-DD` | Público | Lista espaços e reservas do dia sem expor identidade de terceiros |
+| GET | `/api/me` | Discord | Perfil da pessoa autenticada |
+| GET | `/api/auth/discord/start` | Público | Inicia OAuth2 Discord |
+| GET | `/api/auth/discord/callback` | OAuth2 | Valida estado e grava/atualiza perfil no D1 |
+| POST | `/api/reservations` | Discord | Cria reserva com regras de negócio no Worker |
+| DELETE | `/api/reservations/:id` | Discord/titular | Cancela reserva futura própria |
+| POST | `/api/auth/logout` | Sessão | Encerra sessão |
 
-## Evidências para entregar
+## Repositório e entrega
 
-- URL pública funcionando na Cloudflare.
-- Repositório GitHub público com código e histórico.
-- Capturas da aplicação e dos endpoints/API.
-- Este README, migração SQL e registros dos agentes em `docs/agents/`.
-- Três registros de agentes e três skills em `skills/`, usados como papéis especializados na construção/revisão.
+Código-fonte: [github.com/luiz964/dia-claro-cloudflare-tasks](https://github.com/luiz964/dia-claro-cloudflare-tasks). Licença MIT em `LICENSE`; documentos do harness em `docs/agents/` e skills em `skills/`.
 
-## Estado
+## Chave oficial
 
-Aplicação publicada e verificada com o D1 remoto. Evidências estão em `docs/VALIDACAO_REMOTA.md`. O código está em [github.com/luiz964/dia-claro-cloudflare-tasks](https://github.com/luiz964/dia-claro-cloudflare-tasks). A entrega ainda não está final: faltam o projeto sorteado, OAuth2 Discord, publicação do hash oficial (aguardando confirmação) e envio dos links no AVA.
+`P26-2A-5665-AB35-3EB7-E9EB`

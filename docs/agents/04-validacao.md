@@ -1,14 +1,19 @@
 # Agente especializado — Teste e validação
 
 ## Missão
-Verificar a versão publicada e confrontá-la com os critérios obrigatórios, sem alterar arquivos ou dados de produção.
+Conferir a implantação, os endpoints e a aderência à rubrica sem expor dados pessoais de terceiros.
 
 ## Harness e skill
-- Harness multiagente do Codex, em tarefa independente com escopo somente de leitura.
+- Revisão independente por agente especializado no harness multiagente do Codex.
 - Skill: `skills/testing/SKILL.md`.
 
-## Resultado
-- Confirmou `GET /`, `GET /api/health` e `GET /api/tasks` na publicação.
-- Verificou o uso de Cloudflare Worker, D1 e interface Vanilla.
-- Apontou os requisitos ainda não atendidos: OAuth2 Discord, projeto sorteado ainda oculto, hash oficial no README/rodapé, licença MIT e submissão dos links pelo AVA.
-- Não alterou arquivos e não modificou dados de produção.
+## Revisão inicial
+Na primeira versão, confirmou página, API e D1 funcionando, e apontou os requisitos que faltavam depois que o trabalho sorteado foi revelado: agenda de espaços, OAuth2 Discord e regras de reserva. Esses requisitos foram então implementados no Worker, migração e interface.
+
+## Verificação desta versão
+- Sintaxe dos arquivos JavaScript válida.
+- Migrações `0001` e `0002` aplicadas ao D1 local; `0002` aplicada ao D1 remoto.
+- Página pública respondeu HTTP 200, com título da agenda e hash no rodapé.
+- Endpoint público de disponibilidade respondeu HTTP 200 e listou seis espaços cadastrados.
+- Nenhuma reserva de exemplo foi gravada em produção.
+- Login ainda não foi exercitado: faltam Client ID e Client Secret do Discord no ambiente Cloudflare.
