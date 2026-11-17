@@ -16,15 +16,16 @@ Aplicação para consultar e reservar salas de reunião, cabines de estudo e ban
 
 1. Instale dependências: `npm install`.
 2. Aplique as migrações locais: `npm run db:migrate:local`.
-3. Configure `DISCORD_CLIENT_ID` como variável Wrangler e `DISCORD_CLIENT_SECRET` com `npx wrangler secret put DISCORD_CLIENT_SECRET`.
-4. No Discord Developer Portal, habilite OAuth2 e registre como redirect URI o valor de `DISCORD_REDIRECT_URI` em `wrangler.toml` (para local, configure o endereço local correspondente).
-5. Inicie: `npm run dev`.
+3. No [Discord Developer Portal](https://discord.com/developers/applications), crie uma aplicação, abra **OAuth2 → Redirects** e adicione `https://painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev/api/auth/discord/callback`.
+4. No terminal, na pasta do projeto, grave Client ID e Client Secret como secrets com `npx wrangler secret put DISCORD_CLIENT_ID` e `npx wrangler secret put DISCORD_CLIENT_SECRET`. Digite os valores no prompt do Wrangler; não os coloque no código nem no repositório.
+5. Publique de novo com `npm run deploy`.
+6. Para desenvolvimento local, configure as variáveis locais equivalentes e o redirect URI do endereço local antes de executar `npm run dev`.
 
 ## Publicação
 
 Aplicação: [painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev](https://painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev). O Worker usa Workers Assets e o D1 remoto `painel-tarefas-db`.
 
-Para publicar: aplique `npm run db:migrate:remote` e rode `npm run deploy`. Configure no ambiente de produção as variáveis OAuth2 `DISCORD_CLIENT_ID`, `DISCORD_REDIRECT_URI` e o secret `DISCORD_CLIENT_SECRET`. O segredo nunca deve entrar no repositório.
+Para publicar: aplique `npm run db:migrate:remote` e rode `npm run deploy`. A URI de callback de produção fica em `wrangler.toml`. Configure `DISCORD_CLIENT_ID` e `DISCORD_CLIENT_SECRET` como secrets. O Client Secret nunca deve entrar no repositório.
 
 ## Chave única oficial
 
