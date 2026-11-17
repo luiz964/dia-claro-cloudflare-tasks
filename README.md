@@ -16,7 +16,7 @@ Aplicação web em português para organizar tarefas. A interface estática é s
 2. Para desenvolvimento local, aplique a migração com `npm run db:migrate:local`.
 3. Inicie o Worker com `npm run dev`.
 
-Para publicar diretamente com Wrangler, faça login com `npx wrangler login`, crie o banco D1, substitua o ID de exemplo em `wrangler.toml`, aplique `npm run db:migrate:remote` e execute `npm run deploy`.
+Para publicar diretamente com Wrangler, faça login com `npx wrangler login`, crie o banco usando `npx wrangler d1 create painel-tarefas-db`, copie o `database_id` retornado para `wrangler.toml`, aplique `npm run db:migrate:remote` e execute `npm run deploy`.
 
 ## Endpoints
 
@@ -38,4 +38,4 @@ Para publicar diretamente com Wrangler, faça login com `npx wrangler login`, cr
 
 ## Estado
 
-Aplicação e migração conferidas localmente. A publicação remota ainda depende de autenticação Cloudflare: o Wrangler neste ambiente respondeu “You are not authenticated”. O repositório público do GitHub também ainda não foi criado.
+Aplicação e migração conferidas localmente. O código está em [github.com/luiz964/dia-claro-cloudflare-tasks](https://github.com/luiz964/dia-claro-cloudflare-tasks). A publicação remota ainda depende da autorização Cloudflare e da criação do banco D1 remoto.
