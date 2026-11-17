@@ -15,5 +15,6 @@ Na primeira versão, confirmou página, API e D1 funcionando, e apontou os requi
 - Migrações `0001` e `0002` aplicadas ao D1 local; `0002` aplicada ao D1 remoto.
 - Página pública respondeu HTTP 200, com título da agenda e hash no rodapé.
 - Endpoint público de disponibilidade respondeu HTTP 200 e listou seis espaços cadastrados.
+- Criação de reserva sem sessão foi rejeitada com HTTP 401.
 - Nenhuma reserva de exemplo foi gravada em produção.
 - Login ainda não foi exercitado: faltam Client ID e Client Secret do Discord no ambiente Cloudflare.
