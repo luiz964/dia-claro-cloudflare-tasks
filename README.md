@@ -16,7 +16,11 @@ Aplicação web em português para organizar tarefas. A interface estática é s
 2. Para desenvolvimento local, aplique a migração com `npm run db:migrate:local`.
 3. Inicie o Worker com `npm run dev`.
 
-Para publicar diretamente com Wrangler, faça login com `npx wrangler login`, crie o banco usando `npx wrangler d1 create painel-tarefas-db`, copie o `database_id` retornado para `wrangler.toml`, aplique `npm run db:migrate:remote` e execute `npm run deploy`.
+## Publicação
+
+Aplicação publicada em [painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev](https://painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev). O Worker usa Cloudflare Workers Assets e o banco remoto D1 `painel-tarefas-db`.
+
+Para reproduzir em outra conta Cloudflare, faça login com `npx wrangler login`, crie um banco usando `npx wrangler d1 create painel-tarefas-db`, copie o `database_id` retornado para `wrangler.toml`, aplique `npm run db:migrate:remote` e execute `npm run deploy`.
 
 ## Endpoints
 
@@ -38,4 +42,4 @@ Para publicar diretamente com Wrangler, faça login com `npx wrangler login`, cr
 
 ## Estado
 
-Aplicação e migração conferidas localmente. O código está em [github.com/luiz964/dia-claro-cloudflare-tasks](https://github.com/luiz964/dia-claro-cloudflare-tasks). A publicação remota ainda depende da autorização Cloudflare e da criação do banco D1 remoto.
+Aplicação publicada e verificada com o D1 remoto. Evidências da validação estão em `docs/VALIDACAO_REMOTA.md`. O código está em [github.com/luiz964/dia-claro-cloudflare-tasks](https://github.com/luiz964/dia-claro-cloudflare-tasks).
