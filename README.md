@@ -26,6 +26,10 @@ Aplicação publicada em [painel-tarefas-cloudflare.painel-tarefas-cloudflare.wo
 
 Para reproduzir em outra conta Cloudflare, faça login com `npx wrangler login`, crie um banco usando `npx wrangler d1 create painel-tarefas-db`, copie o `database_id` retornado para `wrangler.toml`, aplique `npm run db:migrate:remote` e execute `npm run deploy`.
 
+## Chave única oficial
+
+`P26-2A-5665-AB35-3EB7-E9EB`
+
 ## Endpoints
 
 | Método | Caminho | Ação |
