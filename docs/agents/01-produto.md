@@ -1,4 +1,4 @@
-# Agente 1 — Produto e requisitos
+# Agente principal — Produto e requisitos
 
 ## Objetivo
 Transformar a rubrica em um produto pequeno, demonstrável e com critérios verificáveis.
@@ -9,4 +9,4 @@ Transformar a rubrica em um produto pequeno, demonstrável e com critérios veri
 - Evidências principais: URL publicada, dados persistidos e documentação.
 
 ## Entrega e estado
-Definiu escopo e mapeou cada critério para uma evidência em `docs/PLANO.md`. Registro documentado; este arquivo não afirma execução por um agente externo.
+Definiu a primeira versão enquanto o projeto sorteado ainda estava oculto, mapeou os critérios visíveis em `docs/PLANO.md` e coordenou três revisões especializadas pelo harness multiagente do Codex. O painel de tarefas é uma base provisória; as funções específicas dependem das instruções reveladas no e-mail.
