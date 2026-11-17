@@ -12,11 +12,11 @@ Os itens abaixo resumem a rubrica mostrada no vídeo do enunciado. Ela é materi
 - [x] Fazer revisão de produto, backend e interface com três agentes e registrar as contribuições.
 - [x] Criar três skills de apoio para os papéis especializados.
 - [x] Conferir sintaxe, aplicar migração local e fazer verificação rápida dos fluxos principais.
-- [ ] Autorizar o Wrangler, criar banco D1 e preencher o `database_id` no `wrangler.toml`.
+- [x] Autorizar o Wrangler, criar banco D1 e preencher o `database_id` no `wrangler.toml`.
 - [x] Rodar localmente e corrigir problemas encontrados.
-- [ ] Publicar na Cloudflare e confirmar a URL e a persistência.
+- [x] Publicar na Cloudflare e confirmar a URL e a persistência.
 - [x] Criar repositório público no GitHub e enviar os arquivos.
-- [ ] Capturar evidências de aplicação, API, banco e documentação.
+- [x] Registrar evidências de aplicação, API, banco e documentação em `docs/VALIDACAO_REMOTA.md`.
 - [ ] Conferir o texto completo da rubrica e adaptar se houver requisito que não aparece legível no vídeo.
 
 ## Mapeamento da rubrica (100 pontos)
@@ -44,7 +44,11 @@ Os registros descrevem as três contribuições reais feitas nesta etapa: um age
 - Migração `0001_create_tasks.sql`: aplicada ao D1 local.
 - Verificação rápida local: página e health check retornaram 200; criação, conclusão e exclusão funcionaram; `done` inválido foi rejeitado com 400.
 
-Isso não valida uma instância remota nem substitui a publicação final.
+## Verificação remota
+
+- A página publicada e `/api/health` retornaram HTTP 200.
+- A API criou uma tarefa no D1 remoto, listou o registro, marcou como concluído e o removeu após a verificação.
+- Veja `docs/VALIDACAO_REMOTA.md` para a URL e o resumo da publicação.
 
 ## Repositório
 
