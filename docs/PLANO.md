@@ -20,7 +20,7 @@ Os itens abaixo resumem a rubrica mostrada no vídeo do enunciado. Ela é materi
 - [x] Registrar evidências de aplicação, API, banco e documentação em `docs/VALIDACAO_REMOTA.md`.
 - [ ] Receber o título e as instruções completas do projeto sorteado, ocultas até confirmar o e-mail.
 - [ ] Implementar o projeto sorteado e login Discord OAuth2 (user_id, nome, avatar) com validação de regras no Worker.
-- [ ] Incluir o hash oficial no README e no rodapé depois de autorização para publicar esse identificador.
+- [x] Incluir o hash oficial no README e no rodapé (autorizado pelo aluno).
 - [ ] Enviar as URLs do app e do GitHub ao AVA depois de autorização para submeter.
 
 ## Mapeamento da rubrica (100 pontos)
