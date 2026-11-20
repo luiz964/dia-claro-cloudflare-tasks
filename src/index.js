@@ -7,6 +7,11 @@ const TIME_ZONE = "America/Sao_Paulo";
 const OPEN_MINUTE = 8 * 60;
 const CLOSE_MINUTE = 20 * 60;
 
+function discordConfigured(env) {
+  return /^\d{17,20}$/.test(env.DISCORD_CLIENT_ID || "")
+    && Boolean(env.DISCORD_CLIENT_SECRET && env.DISCORD_REDIRECT_URI);
+}
+
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status,
   headers: {
@@ -124,7 +129,7 @@ async function discordCallback(request, env, url) {
   if (!cookieState || !state || !constantTimeEqual(cookieState, state)) return errorJson("A sessão OAuth expirou; tente entrar novamente.", 400);
   if (issuer !== "https://discord.com") return errorJson("Emissor OAuth inválido.", 400);
   if (url.searchParams.has("error") || !code) return Response.redirect(new URL("/?login=cancelled", url), 303);
-  if (!env.DISCORD_CLIENT_ID || !env.DISCORD_CLIENT_SECRET || !env.DISCORD_REDIRECT_URI) {
+  if (!discordConfigured(env)) {
     return errorJson("O login Discord ainda não foi configurado pelo administrador.", 503);
   }
 
@@ -234,7 +239,7 @@ export default {
 
     try {
       if (url.pathname === "/api/auth/discord/start" && request.method === "GET") {
-        if (!env.DISCORD_CLIENT_ID || !env.DISCORD_REDIRECT_URI) return errorJson("O login Discord ainda não foi configurado.", 503);
+        if (!discordConfigured(env)) return errorJson("O login Discord ainda não foi configurado corretamente.", 503);
         const stateBytes = crypto.getRandomValues(new Uint8Array(32));
         const state = base64url(stateBytes);
         const authorize = new URL(AUTH_URL);
@@ -258,7 +263,7 @@ export default {
       }
 
       if (url.pathname === "/api/auth/status" && request.method === "GET") {
-        return json({ discord_configured: Boolean(env.DISCORD_CLIENT_ID && env.DISCORD_CLIENT_SECRET && env.DISCORD_REDIRECT_URI) });
+        return json({ discord_configured: discordConfigured(env) });
       }
 
       if (url.pathname === "/api/auth/logout" && request.method === "POST") {

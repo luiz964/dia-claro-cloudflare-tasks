@@ -12,8 +12,8 @@ Na primeira versão, a revisão apontou requisitos que faltavam depois que o tra
 
 ## Verificação desta versão
 - Suíte `npm test`: 10 verificações passaram com Worker e D1 locais.
-- Foram exercitados login exigido, configuração/redirect OAuth, datas e durações inválidas, rejeição de horários passados, criação, bloqueio de sobreposição, limite de 120 minutos, privacidade de reservas de terceiros, cancelamento próprio e logout.
-- Fixtures locais fictícias foram removidas ao final; nenhuma reserva de teste foi gravada na produção.
+- Exercitados login exigido, configuração/redirect OAuth, datas e durações inválidas, horários passados, criação, sobreposição, limite de 120 minutos, privacidade, cancelamento e logout.
+- Fixtures locais fictícias foram removidas; nenhuma reserva de teste foi gravada na produção.
 - Página pública HTTP 200, agenda pública HTTP 200, escrita sem sessão HTTP 401 e data inválida HTTP 400.
 - D1 remoto sem migrações pendentes.
-- O início do OAuth em produção redireciona ao Discord. O consentimento e callback com a conta real ainda dependem da ação do usuário no navegador.
+- OAuth real encontrou Client ID inválido: a aplicação Discord retornou formulário inválido. O Worker agora desativa o login quando o ID não tem formato de snowflake numérico; o Client ID correto ainda deve ser gravado pelo usuário.

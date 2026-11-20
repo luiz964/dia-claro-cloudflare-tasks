@@ -70,7 +70,7 @@ async function run() {
   const port = await freePort();
   baseUrl = `http://127.0.0.1:${port}`;
   writeFileSync(varsPath, [
-    `DISCORD_CLIENT_ID="local-test-client"`,
+    `DISCORD_CLIENT_ID="123456789012345678"`,
     `DISCORD_CLIENT_SECRET="${localSecret}"`,
     `DISCORD_REDIRECT_URI="${baseUrl}/api/auth/discord/callback"`,
     "",
