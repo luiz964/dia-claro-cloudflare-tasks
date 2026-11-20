@@ -1,6 +1,10 @@
-# Vértice — agenda de espaços
+# Agenda de espaços do campus
 
 Aplicação para consultar e reservar salas de reunião, cabines de estudo e bancadas de laboratório. A interface diária diferencia horários livres, reservas da pessoa autenticada e reservas feitas por terceiros. O frontend usa HTML, CSS e JavaScript sem framework; o backend roda em Cloudflare Workers e persiste dados no D1.
+
+## Aplicação publicada
+
+**URL do projeto:** [https://painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev](https://painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev)
 
 ## Funcionalidades
 
@@ -16,10 +20,11 @@ Aplicação para consultar e reservar salas de reunião, cabines de estudo e ban
 
 1. Instale dependências: `npm install`.
 2. Aplique as migrações locais: `npm run db:migrate:local`.
-3. No [Discord Developer Portal](https://discord.com/developers/applications), crie uma aplicação, abra **OAuth2 → Redirects** e adicione `https://painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev/api/auth/discord/callback`.
-4. No terminal, na pasta do projeto, grave Client ID e Client Secret como secrets com `npx wrangler secret put DISCORD_CLIENT_ID` e `npx wrangler secret put DISCORD_CLIENT_SECRET`. Digite os valores no prompt do Wrangler; não os coloque no código nem no repositório.
-5. Publique de novo com `npm run deploy`.
-6. Para desenvolvimento local, configure as variáveis locais equivalentes e o redirect URI do endereço local antes de executar `npm run dev`.
+3. Rode a suíte de integração local com `npm test` (Worker e D1 locais; sem gravar dados de teste na produção).
+4. No [Discord Developer Portal](https://discord.com/developers/applications), crie uma aplicação, abra **OAuth2 → Redirects** e adicione `https://painel-tarefas-cloudflare.painel-tarefas-cloudflare.workers.dev/api/auth/discord/callback`.
+5. No PowerShell, na pasta do projeto, grave Client ID e Client Secret com `npx.cmd wrangler secret put DISCORD_CLIENT_ID` e `npx.cmd wrangler secret put DISCORD_CLIENT_SECRET`. Em macOS/Linux, use `npx` no lugar de `npx.cmd`. Digite os valores no prompt do Wrangler; não os coloque no código nem no repositório.
+6. Publique de novo com `npm run deploy`.
+7. Para desenvolvimento local, configure as variáveis locais equivalentes e o redirect URI do endereço local antes de executar `npm run dev`.
 
 ## Publicação
 
@@ -47,6 +52,10 @@ Para publicar: aplique `npm run db:migrate:remote` e rode `npm run deploy`. A UR
 ## Repositório e entrega
 
 Código-fonte: [github.com/luiz964/dia-claro-cloudflare-tasks](https://github.com/luiz964/dia-claro-cloudflare-tasks). Licença MIT em `LICENSE`; documentos do harness em `docs/agents/` e skills em `skills/`.
+
+## Testes
+
+Execute `npm test` para iniciar um Worker local e validar as regras com D1 local e usuários fictícios. A suíte limpa os registros de teste e não grava reservas na produção. A verificação da versão publicada está registrada em `docs/VALIDACAO_REMOTA.md`.
 
 ## Chave oficial
 

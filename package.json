@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
+    "test": "node tests/integration.mjs",
     "db:migrate:local": "wrangler d1 migrations apply painel-tarefas-db --local",
     "db:migrate:remote": "wrangler d1 migrations apply painel-tarefas-db --remote"
   },

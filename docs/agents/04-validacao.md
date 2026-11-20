@@ -8,13 +8,12 @@ Conferir a implantação, os endpoints e a aderência à rubrica sem expor dados
 - Skill: `skills/testing/SKILL.md`.
 
 ## Revisão inicial
-Na primeira versão, confirmou página, API e D1 funcionando, e apontou os requisitos que faltavam depois que o trabalho sorteado foi revelado: agenda de espaços, OAuth2 Discord e regras de reserva. Esses requisitos foram então implementados no Worker, migração e interface.
+Na primeira versão, a revisão apontou requisitos que faltavam depois que o trabalho sorteado foi revelado: agenda de espaços, OAuth2 Discord e regras de reserva. Esses requisitos foram então implementados no Worker, migração e interface.
 
 ## Verificação desta versão
-- Sintaxe dos arquivos JavaScript válida.
-- Migrações `0001` e `0002` aplicadas ao D1 local; `0002` aplicada ao D1 remoto.
-- Página pública respondeu HTTP 200, com título da agenda e hash no rodapé.
-- Endpoint público de disponibilidade respondeu HTTP 200 e listou seis espaços cadastrados.
-- Criação de reserva sem sessão foi rejeitada com HTTP 401.
-- Nenhuma reserva de exemplo foi gravada em produção.
-- Login ainda não foi exercitado: faltam Client ID e Client Secret do Discord no ambiente Cloudflare.
+- Suíte `npm test`: 10 verificações passaram com Worker e D1 locais.
+- Foram exercitados login exigido, configuração/redirect OAuth, datas e durações inválidas, rejeição de horários passados, criação, bloqueio de sobreposição, limite de 120 minutos, privacidade de reservas de terceiros, cancelamento próprio e logout.
+- Fixtures locais fictícias foram removidas ao final; nenhuma reserva de teste foi gravada na produção.
+- Página pública HTTP 200, agenda pública HTTP 200, escrita sem sessão HTTP 401 e data inválida HTTP 400.
+- D1 remoto sem migrações pendentes.
+- O início do OAuth em produção redireciona ao Discord. O consentimento e callback com a conta real ainda dependem da ação do usuário no navegador.
