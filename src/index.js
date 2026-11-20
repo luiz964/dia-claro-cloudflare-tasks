@@ -167,14 +167,13 @@ async function discordCallback(request, env, url) {
       updated_at = datetime('now')
   `).bind(profile.id, profile.username, profile.global_name || profile.username, avatarUrl).run();
 
-  return new Response(null, {
-    status: 303,
-    headers: {
-      location: new URL("/", url).toString(),
-      "set-cookie": [clearState, await createSessionCookie(profile.id, env.DISCORD_CLIENT_SECRET)],
-      "cache-control": "no-store",
-    },
+  const headers = new Headers({
+    location: new URL("/", url).toString(),
+    "cache-control": "no-store",
   });
+  headers.append("set-cookie", clearState);
+  headers.append("set-cookie", await createSessionCookie(profile.id, env.DISCORD_CLIENT_SECRET));
+  return new Response(null, { status: 303, headers });
 }
 
 async function createReservation(request, env, user) {
@@ -338,3 +337,4 @@ export default {
     }
   },
 };
+
